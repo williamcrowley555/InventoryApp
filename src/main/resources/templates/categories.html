@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="header :: html_head(headTitle='List Categories')">
+</head>
+<body>
+    <div class="container">
+        <h1>Category List</h1>
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="category : ${categoryList}">
+                        <td th:text="${category.id}"></td>
+                        <td th:text="${category.name}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
