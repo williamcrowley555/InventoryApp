@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService implements ICategoryService {
@@ -17,6 +18,18 @@ public class CategoryService implements ICategoryService {
     @Override
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public Category getCategoryById(Long id) {
+        Optional<Category> optional = categoryRepository.findById(id);
+        Category category = null;
+        if (optional.isPresent()) {
+            category = optional.get();
+        } else {
+            throw new RuntimeException("Category Id:" + id + " does not exist");
+        }
+        return category;
     }
 
     @Override

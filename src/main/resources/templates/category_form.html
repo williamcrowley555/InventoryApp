@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="header :: html_head(headTitle='Category Form')">
+    </head>
+<body>
+<div class="container text-center">
+    <h1>Category Form</h1>
+    <div>
+        <form th:action="@{/categories/saveCategory}" th:object="${category}" method="POST"
+              style="max-width: 600px; margin: 30px auto;">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Category Name:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="Enter category name" required>
+                </div>
+            </div>
+            <div class="text-center p-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
