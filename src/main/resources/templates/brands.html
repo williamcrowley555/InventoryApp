@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="header :: html_head(headTitle='List Brands')">
+    </head>
+<body>
+<div class="container">
+    <h1>Brand List</h1>
+    <div>
+        <div class="my-3">
+            <a th:href="@{/brands/new}" class="btn btn-primary">Add Brand</a>
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Categories</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="brand : ${brandList}">
+                <td th:text="${brand.id}"></td>
+                <td th:text="${brand.name}"></td>
+                <td th:text="${brand.categories}"></td>
+                <td>
+                    <a th:href="@{|brands/edit/${brand.id}|}">Edit</a>
+                    &nbsp;&nbsp;
+                    <a th:href="@{|brands/delete/${brand.id}|}"
+                       th:onclick="|return confirm('Are you sure you want to delete brand id: ${brand.id}?')|">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

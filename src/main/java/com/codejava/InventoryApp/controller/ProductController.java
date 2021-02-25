@@ -22,7 +22,7 @@ public class ProductController {
     private ICategoryService categoryService;
 
     @GetMapping(value = {"", "/"})
-    public String listCategories(Model model) {
+    public String listProducts(Model model) {
         List<Product> productList = productService.getAllProducts();
         model.addAttribute("productList" , productList);
         return "products";

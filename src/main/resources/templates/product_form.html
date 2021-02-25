@@ -6,6 +6,7 @@
 <body>
 <div class="container text-center">
     <h1>Product Form</h1>
+    <h1 th:text="${product.id == null ? 'Add Product' : 'Edit Product'}"></h1>
     <div>
         <form th:action="@{/products/saveProduct}" th:object="${product}" method="POST"
               style="max-width: 600px; margin: 30px auto;">

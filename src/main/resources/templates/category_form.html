@@ -6,6 +6,7 @@
 <body>
 <div class="container text-center">
     <h1>Category Form</h1>
+    <h1 th:text="${category.id == null ? 'Add Category' : 'Edit Category'}"></h1>
     <div>
         <form th:action="@{/categories/saveCategory}" th:object="${category}" method="POST"
               style="max-width: 600px; margin: 30px auto;">
