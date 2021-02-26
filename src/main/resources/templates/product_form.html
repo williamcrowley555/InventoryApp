@@ -38,10 +38,10 @@
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">Detail #[[${i}]]:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="detailName" class="form-control" placeholder="Name" required>
+                    <input type="text" name="detailName" class="form-control" placeholder="Name">
                 </div>
                 <div class="col-sm-4">
-                    <input type="text" name="detailValue" class="form-control" placeholder="Value" required>
+                    <input type="text" name="detailValue" class="form-control" placeholder="Value">
                 </div>
             </div>
             </th:block>
@@ -50,10 +50,10 @@
                 <div class="form-group row">
                     <label class="col-form-label col-sm-4">Detail #[[${status.count}]]:</label>
                     <div class="col-sm-4">
-                        <input type="text" th:value="${detail.name}" name="detailName" class="form-control" placeholder="Name" required>
+                        <input type="text" th:value="${detail.name}" name="detailName" class="form-control" placeholder="Name">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" th:value="${detail.value}" name="detailValue" class="form-control" placeholder="Value" required>
+                        <input type="text" th:value="${detail.value}" name="detailValue" class="form-control" placeholder="Value">
                     </div>
                 </div>
             </th:block>

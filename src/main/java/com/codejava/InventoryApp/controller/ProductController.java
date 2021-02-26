@@ -48,7 +48,9 @@ public class ProductController {
             if (detailIds != null && detailIds.length > 0) {
                 product.setDetail(Long.valueOf(detailIds[i]), detailNames[i], detailValues[i]);
             } else {
-                product.addDetail(detailNames[i], detailValues[i]);
+                if (!(detailNames[i].isEmpty() && detailValues[i].isEmpty())) {
+                    product.addDetail(detailNames[i], detailValues[i]);
+                }
             }
         }
         productService.saveProduct(product);
