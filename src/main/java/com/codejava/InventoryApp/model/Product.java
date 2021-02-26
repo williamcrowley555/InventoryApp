@@ -1,6 +1,8 @@
 package com.codejava.InventoryApp.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Product")
 @Table(name = "product",
@@ -22,6 +24,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductDetail> productDetails = new ArrayList<>();
 
     public Product() {
     }
@@ -61,6 +66,22 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<ProductDetail> getProductDetails() {
+        return productDetails;
+    }
+
+    public void setProductDetails(List<ProductDetail> productDetails) {
+        this.productDetails = productDetails;
+    }
+
+    public void addDetail(String name, String value) {
+        this.productDetails.add(new ProductDetail(name, value, this));
+    }
+
+    public void setDetail(Long id, String name, String value) {
+        this.productDetails.add(new ProductDetail(id, name, value, this));
     }
 
     @Override

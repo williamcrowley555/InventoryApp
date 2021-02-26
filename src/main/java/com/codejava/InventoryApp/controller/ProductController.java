@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -38,7 +39,18 @@ public class ProductController {
     }
 
     @PostMapping("saveProduct")
-    public String saveProduct(@ModelAttribute("product") Product product) {
+    public String saveProduct(@ModelAttribute("product") Product product, HttpServletRequest request) {
+        String[] detailIds = request.getParameterValues("detailId");
+        String[] detailNames = request.getParameterValues("detailName");
+        String[] detailValues = request.getParameterValues("detailValue");
+
+        for(int i = 0; i < detailNames.length; ++i) {
+            if (detailIds != null && detailIds.length > 0) {
+                product.setDetail(Long.valueOf(detailIds[i]), detailNames[i], detailValues[i]);
+            } else {
+                product.addDetail(detailNames[i], detailValues[i]);
+            }
+        }
         productService.saveProduct(product);
         return "redirect:/products";
     }

@@ -1,6 +1,7 @@
 package com.codejava.InventoryApp.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "Brand")
@@ -19,7 +20,7 @@ public class Brand {
 
     @OneToMany
     @JoinColumn(name = "brand_id")
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
 
     public Brand() {
     }

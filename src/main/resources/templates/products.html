@@ -17,6 +17,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Category</th>
+                <th scope="col">Details</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -26,6 +27,7 @@
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.category.name}"></td>
+                <td th:text="${product.productDetails}"></td>
                 <td>
                     <a th:href="@{|products/edit/${product.id}|}">Edit</a>
                     &nbsp;
