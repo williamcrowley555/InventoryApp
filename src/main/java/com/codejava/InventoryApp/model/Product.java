@@ -31,6 +31,10 @@ public class Product {
     public Product() {
     }
 
+    public Product(Long id) {
+        this.id = id;
+    }
+
     public Product(String name, Float price) {
         this.name = name;
         this.price = price;
@@ -84,13 +88,20 @@ public class Product {
         this.productDetails.add(new ProductDetail(id, name, value, this));
     }
 
+//    @Override
+//    public String toString() {
+//        return "Product{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", price=" + price +
+//                ", category=" + category +
+//                '}';
+//    }
+
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", category=" + category +
+                "name='" + name + '\'' +
                 '}';
     }
 }

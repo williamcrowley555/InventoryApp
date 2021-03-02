@@ -58,13 +58,15 @@ public class UserRepositoryTest {
     public void testAssignRoleToExistingUser() {
         User user = userRepository.findById(1L).get();
         Role roleEditor = entityManager.find(Role.class, 2L);
+        // Also work with new Role(2l) withour override Role's equals method
         user.addRole(roleEditor);
     }
 
     @Test
     public void testRemoveRoleFromExistingUser() {
         User user = userRepository.findById(1L).get();
-        Role role = new Role(2l);
+        // Must override Role's equals method
+        Role role = new Role(5l);
         user.removeRole(role);
     }
 
