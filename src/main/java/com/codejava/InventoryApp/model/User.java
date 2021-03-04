@@ -18,8 +18,11 @@ public class User {
     @Column(name = "email", nullable = false, length = 45)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 10)
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
 
     @ManyToMany
     @JoinTable(
@@ -39,6 +42,12 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public User(String email, String password, boolean enabled) {
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -63,6 +72,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Set<Role> getRoles() {
