@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <head th:replace="header :: html_head(headTitle='List Products')">
     </head>
@@ -18,7 +19,7 @@
                 <th scope="col">Price</th>
                 <th scope="col">Category</th>
                 <th scope="col">Details</th>
-                <th scope="col">Actions</th>
+                <th sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')" scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -28,16 +29,19 @@
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.category.name}"></td>
                 <td th:text="${product.productDetails}"></td>
-                <td>
+                <td sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
                     <a th:href="@{|products/edit/${product.id}|}">Edit</a>
                     &nbsp;
-                    <a th:href="@{|products/delete/${product.id}|}"
+                    <a sec:authorize="hasRole('ROLE_ADMIN')"
+                       th:href="@{|products/delete/${product.id}|}"
                        th:onclick="|return confirm('Are you sure you want to delete product id: ${product.id}?')|">Delete</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
+    <div th:replace="footer :: footer"></div>
 </div>
 </body>
 </html>

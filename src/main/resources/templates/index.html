@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:replace="header :: html_head(headTitle='Homepage')">
 </head>
 <body>
     <div class="container text-center">
         <div>
-            <h1>Welcome to Homepage</h1>
+            <div sec:authorize="isAuthenticated()">
+                <h2>
+                    Welcome back, <b sec:authentication="name"></b>
+                    &nbsp;
+                </h2>
+                <h5>Your Roles: <span sec:authentication="principal.authorities"></span></h5>
+            </div>
+            <form th:action="@{/logout}" method="POST">
+                <input type="submit" value="Logout">
+            </form>
         </div>
         <div class="p-2">
             <a class="h2" th:href="@{/categories}">List Categories</a>
@@ -20,5 +30,6 @@
             <a class="h2" th:href="@{/users}">List Users</a>
         </div>
     </div>
+
 </body>
 </html>
