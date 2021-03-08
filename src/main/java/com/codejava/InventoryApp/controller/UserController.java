@@ -7,8 +7,10 @@ import com.codejava.InventoryApp.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -39,7 +41,14 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public String saveUser(@ModelAttribute("user") User user) {
+    public String saveUser(Model model, @Valid @ModelAttribute("user") User user,
+                           BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<Role> roleList = roleService.getAllRoles();
+            model.addAttribute("roleList", roleList);
+
+            return "user_form";
+        }
         userService.saveUser(user);
         return "redirect:/users";
     }

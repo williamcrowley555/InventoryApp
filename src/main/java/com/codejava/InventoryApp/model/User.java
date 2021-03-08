@@ -1,6 +1,10 @@
 package com.codejava.InventoryApp.model;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,20 +20,24 @@ public class User {
     private Long id;
 
     @Column(name = "email", nullable = false, length = 45)
+    @Email
+    @NotBlank
     private String email;
 
     @Column(name = "password", nullable = false)
+    @Size(min = 5, message = "Password must be at least 5 characters")
     private String password;
 
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
             )
+    @Valid
     private Set<Role> roles = new HashSet<>();
 
     public User() {

@@ -4,6 +4,7 @@ import com.codejava.InventoryApp.model.User;
 import com.codejava.InventoryApp.repository.UserRepository;
 import com.codejava.InventoryApp.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +35,9 @@ public class UserService implements IUserService {
 
     @Override
     public User saveUser(User user) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         return userRepository.save(user);
     }
 
