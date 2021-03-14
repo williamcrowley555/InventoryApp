@@ -1,5 +1,6 @@
 package com.codejava.InventoryApp.controller;
 
+import com.codejava.InventoryApp.dto.UserRegistrationDTO;
 import com.codejava.InventoryApp.model.Role;
 import com.codejava.InventoryApp.model.User;
 import com.codejava.InventoryApp.service.IRoleService;
@@ -40,6 +41,14 @@ public class UserController {
         return "user_form";
     }
 
+    @GetMapping("/registration")
+    public String showUserRegistrationForm(Model model) {
+        UserRegistrationDTO user = new UserRegistrationDTO();
+
+        model.addAttribute("user", user);
+        return "user_registration_form";
+    }
+
     @PostMapping("/save")
     public String saveUser(Model model, @Valid @ModelAttribute("user") User user,
                            BindingResult bindingResult) {
@@ -51,6 +60,16 @@ public class UserController {
         }
         userService.saveUser(user);
         return "redirect:/users";
+    }
+
+    @PostMapping("/register")
+    public String register(Model model, @Valid @ModelAttribute("user") UserRegistrationDTO user,
+                           BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "user_registration_form";
+        }
+        userService.saveUserRegistration(user);
+        return "redirect:/users/registration?success";
     }
 
     @GetMapping("/edit/{id}")

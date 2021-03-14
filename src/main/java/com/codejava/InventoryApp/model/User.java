@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +29,16 @@ public class User {
     @Size(min = 5, message = "Password must be at least 5 characters")
     private String password;
 
+    @Column(name = "first_name", nullable = false)
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "Invalid input")
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "Invalid input")
+    private String lastName;
+
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
@@ -47,7 +58,7 @@ public class User {
         this.id = id;
     }
 
-    public User(String email, String password) {
+    public User(@Email @NotBlank String email, @Size(min = 5, message = "Password must be at least 5 characters") String password) {
         this.email = email;
         this.password = password;
     }
@@ -56,6 +67,15 @@ public class User {
         this.email = email;
         this.password = password;
         this.enabled = enabled;
+    }
+
+    public User(String email, String password, String firstName, String lastName, boolean enabled, Set<Role> roles) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.enabled = enabled;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -80,6 +100,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public boolean isEnabled() {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="header :: html_head(headTitle='Login Page')">
+    </head>
+<body>
+<div class="container text-center">
+    <h1>Login Form</h1>
+    <div>
+        <form th:action="@{/login}" method="POST" style="max-width: 600px; margin: 30px auto;">
+            <div th:if="${param.error}">
+                <div class="col-sm-12 alert alert-danger" role="alert">Invalid email or password</div>
+            </div>
+
+            <div th:if="${param.logout}">
+                <div class="col-sm-12 alert alert-info" role="alert">You have been logged out</div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">User Email:</label>
+                <div class="col-sm-8">
+                    <input type="email" name="email" id="email" class="form-control"
+                           placeholder="Enter user email" required autofocus>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Password:</label>
+                <div class="col-sm-8">
+                    <input type="password" name="password" id="password" class="form-control"
+                           placeholder="Enter password" required>
+                </div>
+            </div>
+
+            <div class="text-center p-3">
+                <button type="submit" name="login-submit" id="login-submit" class="btn btn-primary">Login</button>
+                &nbsp;
+                <div class="mt-3">Don't have an account?  <a th:href="@{/users/registration}">Register here</a></div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
